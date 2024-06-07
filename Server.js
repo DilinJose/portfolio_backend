@@ -4,6 +4,7 @@ const dbConnection = require("./dbConnection");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
+const { fetchUser } = require("./controllers/LoginController");
 const {
   fetchCompanies,
   fetchCompany,
@@ -39,6 +40,9 @@ PORT = 8050;
 
 dbConnection();
 
+//login
+app.post("/login", fetchUser);
+
 //company
 app.get("/company", fetchCompanies);
 app.get("/company/:id", fetchCompany);
@@ -60,9 +64,9 @@ app.get("/", (req, res) => {
 
 const server = app.listen(PORT, () =>
   console.log(`Server Connected to port ${PORT}`)
-)
+);
 // Handling Error
-process.on("unhandledRejection", err => {
-  console.log(`An error occurred: ${err.message}`)
-  server.close(() => process.exit(1))
-})
+process.on("unhandledRejection", (err) => {
+  console.log(`An error occurred: ${err.message}`);
+  server.close(() => process.exit(1));
+});
