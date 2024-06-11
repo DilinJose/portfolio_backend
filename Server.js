@@ -37,6 +37,7 @@ app.use("/uploads", express.static("uploads"));
 app.use(cors());
 
 PORT = 8050;
+IP = "192.168.0.51";
 
 dbConnection();
 
@@ -62,7 +63,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-const server = app.listen(PORT, () =>
+const server = app.listen(PORT, IP, () =>
   console.log(`Server Connected to port ${PORT}`)
 );
 // Handling Error
